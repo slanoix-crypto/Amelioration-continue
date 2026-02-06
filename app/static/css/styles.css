@@ -1,0 +1,9 @@
+body { margin: 0; font-family: system-ui, Arial, sans-serif; }
+.layout { display: grid; grid-template-columns: 260px 1fr; height: 100vh; }
+.sidebar { background: #f4f4f4; padding: 16px; }
+.brand { font-weight: 700; margin-bottom: 16px; }
+.nav { display: grid; gap: 8px; }
+.nav-item { padding: 10px 12px; border-radius: 10px; text-decoration: none; color: #222; }
+.nav-item.active { background: #f7d4b5; } /* orange pâle */
+.header { background: #d9d9d9; padding: 14px 18px; display:flex; justify-content:space-between; }
+.content { padding: 18px; }

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/static/css/styles.css" />
+  <title>{{ title or "Améliorations" }}</title>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">Améliorations</div>
+      <nav class="nav">
+        <a class="nav-item {% if active_tab=='tableau' %}active{% endif %}" href="/">Tableau</a>
+        <a class="nav-item {% if active_tab=='celebration' %}active{% endif %}" href="/celebration">Célébration</a>
+        <a class="nav-item {% if active_tab=='rapports' %}active{% endif %}" href="/rapports">Rapports</a>
+        <a class="nav-item {% if active_tab=='admin' %}active{% endif %}" href="/admin">Administration</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <header class="header">
+        <div class="month">{{ current_month_label }}</div>
+        <div class="goal">Objectif mensuel : <strong>{{ monthly_goal }}</strong></div>
+      </header>
+
+      <section class="content">
+        {% block content %}{% endblock %}
+      </section>
+    </main>
+  </div>
+</body>
+</html>
