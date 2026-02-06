@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Administration</h1>
+
+  {% if request.query_params.get("error") == "linked" %}
+    <div style="margin: 12px 0; padding: 10px 12px; border-radius: 12px; background: #fff3cd; border: 1px solid #ffeeba;">
+      Impossible de supprimer : cet employé est déjà lié à une ou plusieurs améliorations.
+      Désactive-le plutôt si tu veux le retirer de l'usage.
+    </div>
+  {% endif %}
+
+  <div style="max-width:520px;">
+    <h2>Employés</h2>
+
+    <form method="post" action="/admin/employees" style="display:flex; gap:8px; margin:12px 0;">
+      <input name="name" placeholder="Nom de l'employé" required style="flex:1; padding:10px; border-radius:10px; border:1px solid #ccc;">
+      <button type="submit" style="padding:10px 14px; border-radius:10px; border:1px solid #222;">Ajouter</button>
+    </form>
+
+    <div style="display:grid; gap:8px;">
+      {% for e in employees %}
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border-radius:10px; border:1px solid #ddd; background:#fff;">
+          <div>
+            <strong>{{ e.name }}</strong>
+            {% if not e.active %}
+              <span style="margin-left:8px; font-size:12px; opacity:0.7;">(inactif)</span>
+            {% endif %}
+          </div>
+
+          <div style="display:flex; gap:8px;">
+            <form method="post" action="/admin/employees/{{ e.id }}/toggle">
+              <button type="submit" style="padding:8px 12px; border-radius:10px; border:1px solid #222;">
+                {% if e.active %}Désactiver{% else %}Activer{% endif %}
+              </button>
+            </form>
+
+            <form method="post" action="/admin/employees/{{ e.id }}/delete"
+                  onsubmit="return confirm('Supprimer définitivement {{ e.name }} ? Cette action est irréversible.')">
+              <button type="submit" style="padding:8px 12px; border-radius:10px; border:1px solid #b00020; color:#b00020; background:#fff; border-radius:10px;">
+                Supprimer
+              </button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
